@@ -16,16 +16,13 @@
 #ifndef __AppDelegate_H__
 #define __AppDelegate_H__
 
-#import "OgreDemoApp.h"
-
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+@class ViewController;
+
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 {
-    NSTimer *mTimer;
-    DemoApp demo;
-    
     // Use of the CADisplayLink class is the preferred method for controlling your animation timing.
     // CADisplayLink will link to the main display and fire every vsync when added to a given run-loop.
     // The NSTimer class is used only as fallback when running on a pre 3.1 device where CADisplayLink
@@ -34,15 +31,15 @@
     NSDate *mDate;
     double mLastFrameTime;
     double mStartTime;
-    BOOL mDisplayLinkSupported;
 }
 
-- (void)go;
 - (void)renderOneFrame:(id)sender;
 
-@property (retain) NSTimer *mTimer;
 @property (nonatomic) double mLastFrameTime;
 @property (nonatomic) double mStartTime;
+
+@property (strong, nonatomic) UIWindow* mWindow;
+@property (strong, nonatomic) ViewController* mViewController;
 
 @end
 

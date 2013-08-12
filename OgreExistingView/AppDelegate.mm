@@ -15,11 +15,21 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
+#import "OgreView.h"
+
 #include "OgreFramework.h"
+#include "OgreDemoApp.h"
+
+// private category
+@interface AppDelegate ()
+{
+    DemoApp demo;
+}
+@end
 
 @implementation AppDelegate
 
-@synthesize mTimer;
 @dynamic mLastFrameTime;
 @dynamic mStartTime;
 
@@ -42,83 +52,67 @@
     }
 }
 
-- (void)go {
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+    self.mWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    // Override point for customization after application launch.
+    self.mViewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+
+    UIView* view = self.mViewController.view;
+    unsigned int width  = view.frame.size.width;
+    unsigned int height = view.frame.size.height;
+    
+    OgreView* ogreView = [[OgreView alloc] initWithFrame:CGRectMake(0,0,width,height)];
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     mLastFrameTime = 1;
     mStartTime = 0;
-    mTimer = nil;
     
-    try {
-        demo.startDemo();
+    try
+    {
+        demo.startDemo(self.mWindow, ogreView, self.mViewController, width, height);
         
         Ogre::Root::getSingleton().getRenderSystem()->_initRenderTargets();
         
         // Clear event times
 		Ogre::Root::getSingleton().clearEventTimes();
-    } catch( Ogre::Exception& e ) {
+    }
+    catch( Ogre::Exception& e )
+    {
         std::cerr << "An exception has occurred: " <<
         e.getFullDescription().c_str() << std::endl;
     }
     
-    if (mDisplayLinkSupported)
-    {
-        // CADisplayLink is API new to iPhone SDK 3.1. Compiling against earlier versions will result in a warning, but can be dismissed
-        // if the system version runtime check for CADisplayLink exists in -initWithCoder:. The runtime check ensures this code will
-        // not be called in system versions earlier than 3.1.
-        mDate = [[NSDate alloc] init];
-        mLastFrameTime = -[mDate timeIntervalSinceNow];
-        
-        mDisplayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self selector:@selector(renderOneFrame:)];
-        [mDisplayLink setFrameInterval:mLastFrameTime];
-        [mDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    }
-    else
-    {
-        mTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)(1.0f / 60.0f) * mLastFrameTime
-                                                  target:self
-                                                selector:@selector(renderOneFrame:)
-                                                userInfo:nil
-                                                 repeats:YES];
-    }
-    [pool release];
-}
+    // Call made here to override Ogre set view controller (cf. http://www.ogre3d.org/forums/viewtopic.php?f=2&t=71508&p=468814&hilit=externalviewhandle#p468814)
+    self.mWindow.rootViewController = self.mViewController;
+    [view addSubview:ogreView];
+    
+    // CADisplayLink is API new to iPhone SDK 3.1. Compiling against earlier versions will result in a warning, but can be dismissed
+    // if the system version runtime check for CADisplayLink exists in -initWithCoder:. The runtime check ensures this code will
+    // not be called in system versions earlier than 3.1.
+    mDate = [[NSDate alloc] init];
+    mLastFrameTime = -[mDate timeIntervalSinceNow];
+    
+    mDisplayLink = [NSClassFromString(@"CADisplayLink") displayLinkWithTarget:self selector:@selector(renderOneFrame:)];
+    [mDisplayLink setFrameInterval:mLastFrameTime];
+    [mDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{
-    // Hide the status bar
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [pool release];
     
-    mDisplayLinkSupported = FALSE;
-    mLastFrameTime = 1;
-    mStartTime = 0;
-    mTimer = nil;
-    
-    NSString *reqSysVer = @"3.1";
-    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
-    if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
-        mDisplayLinkSupported = TRUE;
-    
-    [self go];
+    [self.mWindow makeKeyAndVisible];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     Ogre::Root::getSingleton().queueEndRendering();
     
-    if (mDisplayLinkSupported)
-    {
-        [mDate release];
-        mDate = nil;
-        
-        [mDisplayLink invalidate];
-        mDisplayLink = nil;
-    }
-    else
-    {
-        [mTimer invalidate];
-        mTimer = nil;
-    }
+    [mDate release];
+    mDate = nil;
+    
+    [mDisplayLink invalidate];
+    mDisplayLink = nil;
+
     [[UIApplication sharedApplication] performSelector:@selector(terminate:) withObject:nil afterDelay:0.0];
 }
 
@@ -152,32 +146,14 @@
     }
     else
     {
-		
-	    if (mDisplayLinkSupported)
-	    {
-	        [mDate release];
-	        mDate = nil;
-            
-	        [mDisplayLink invalidate];
-	        mDisplayLink = nil;
-	    }
-	    else
-	    {
-	        [mTimer invalidate];
-	        mTimer = nil;
-	    }
+        [mDate release];
+        mDate = nil;
+        
+        [mDisplayLink invalidate];
+        mDisplayLink = nil;
+
         [[UIApplication sharedApplication] performSelector:@selector(terminate:) withObject:nil afterDelay:0.0];
     }
-}
-
-- (void)dealloc {
-    if(mTimer)
-    {
-        [mTimer invalidate];
-        mTimer = nil;
-    }
-    
-    [super dealloc];
 }
 
 @end

@@ -103,10 +103,10 @@ void DemoApp::finalizeRTShaderSystem()
 }
 #endif // USE_RTSHADER_SYSTEM
 
-void DemoApp::startDemo()
+void DemoApp::startDemo(void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height)
 {
 	new OgreFramework();
-	if(!OgreFramework::getSingletonPtr()->initOgre("DemoApp v1.0", this, 0))
+	if(!OgreFramework::getSingletonPtr()->initOgre("DemoApp v1.0", uiWindow, uiView, uiViewController, width, height))
 		return;
     
 	m_bShutdown = false;
@@ -209,32 +209,6 @@ void DemoApp::runDemo()
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage("Main loop quit");
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage("Shutdown OGRE...");
 #endif
-}
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
-bool DemoApp::keyPressed(const OIS::KeyEvent &keyEventRef)
-{
-#if !defined(OGRE_IS_IOS)
-	OgreFramework::getSingletonPtr()->keyPressed(keyEventRef);
-	
-	if(OgreFramework::getSingletonPtr()->m_pKeyboard->isKeyDown(OIS::KC_F))
-	{
-        //do something
-	}
-#endif
-	return true;
-}
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
-bool DemoApp::keyReleased(const OIS::KeyEvent &keyEventRef)
-{
-#if !defined(OGRE_IS_IOS)
-	OgreFramework::getSingletonPtr()->keyReleased(keyEventRef);
-#endif
-
-	return true;
 }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||

@@ -78,16 +78,13 @@ protected:
 };
 #endif
 
-class DemoApp : public OIS::KeyListener
+class DemoApp
 {
 public:
 	DemoApp();
 	~DemoApp();
     
-	void startDemo();
-	
-	bool keyPressed(const OIS::KeyEvent &keyEventRef);
-	bool keyReleased(const OIS::KeyEvent &keyEventRef);
+	void startDemo(void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height);
     
 private:
     void setupDemoScene();

@@ -28,45 +28,33 @@ OgreFramework::OgreFramework()
 	m_pKeyboard			= 0;
 	m_pMouse			= 0;
     
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE
-    m_ResourcePath = macBundlePath() + "/Contents/Resources/";
-#elif defined(OGRE_IS_IOS)
     m_ResourcePath = macBundlePath() + "/";
-#else
-    m_ResourcePath = "";
-#endif
     m_pTrayMgr          = 0;
     m_FrameEvent        = Ogre::FrameEvent();
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-#if defined(OGRE_IS_IOS)
-bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListener, OIS::MultiTouchListener *pMouseListener)
-#else
-bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListener, OIS::MouseListener *pMouseListener)
-#endif
+bool OgreFramework::initOgre(Ogre::String wndTitle, void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height)
 {
     new Ogre::LogManager();
 
 	m_pLog = Ogre::LogManager::getSingleton().createLog("OgreLogfile.log", true, true, false);
 	m_pLog->setDebugOutputEnabled(true);
     
-    String pluginsPath;
-    // only use plugins.cfg if not static
-#ifndef OGRE_STATIC_LIB
-    pluginsPath = m_ResourcePath + "plugins.cfg";
-#endif
-    
-    m_pRoot = new Ogre::Root(pluginsPath, Ogre::macBundlePath() + "/ogre.cfg");
-    
-#ifdef OGRE_STATIC_LIB
+    m_pRoot = new Ogre::Root("", Ogre::macBundlePath() + "/ogre.cfg");
     m_StaticPluginLoader.load();
-#endif
     
-	if(!m_pRoot->showConfigDialog())
-		return false;
-	m_pRenderWnd = m_pRoot->initialise(true, wndTitle);
+    Ogre::NameValuePairList params;
+    params["colourDepth"]          = "32";
+    params["contentScalingFactor"] = 2.0;
+    params["externalWindowHandle"] = Ogre::StringConverter::toString((unsigned long)uiWindow);
+    params["externalViewHandle"] = Ogre::StringConverter::toString((unsigned long)uiView);
+    //params["externalViewController"] = Ogre::StringConverter::toString((unsigned long)uiViewController);
     
+    // initialize, dont' create render window
+    m_pRoot->initialise(false, "");
+    
+    // now create render window by attaching to the iOS UIView stuff
+    m_pRenderWnd = m_pRoot->createRenderWindow(wndTitle,width,height,true,&params);
 	m_pSceneMgr = m_pRoot->createSceneManager(ST_GENERIC, "SceneManager");
 	m_pSceneMgr->setAmbientLight(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 	
@@ -90,27 +78,8 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     
 	m_pInputMgr = OIS::InputManager::createInputSystem(paramList);
     
-#if !defined(OGRE_IS_IOS)
-    m_pKeyboard = static_cast<OIS::Keyboard*>(m_pInputMgr->createInputObject(OIS::OISKeyboard, true));
-	m_pMouse = static_cast<OIS::Mouse*>(m_pInputMgr->createInputObject(OIS::OISMouse, true));
-    
-	m_pMouse->getMouseState().height = m_pRenderWnd->getHeight();
-	m_pMouse->getMouseState().width	 = m_pRenderWnd->getWidth();
-#else
 	m_pMouse = static_cast<OIS::MultiTouch*>(m_pInputMgr->createInputObject(OIS::OISMultiTouch, true));
-#endif
-    
-#if !defined(OGRE_IS_IOS)
-	if(pKeyListener == 0)
-		m_pKeyboard->setEventCallback(this);
-	else
-		m_pKeyboard->setEventCallback(pKeyListener);
-#endif
-    
-	if(pMouseListener == 0)
-		m_pMouse->setEventCallback(this);
-	else
-		m_pMouse->setEventCallback(pMouseListener);
+    m_pMouse->setEventCallback(this);
     
 	Ogre::String secName, typeName, archName;
 	Ogre::ConfigFile cf;
@@ -126,13 +95,13 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
         {
             typeName = i->first;
             archName = i->second;
-#if OGRE_PLATFORM == OGRE_PLATFORM_APPLE || defined(OGRE_IS_IOS)
+
             // OS X does not set the working directory relative to the app,
             // In order to make things portable on OS X we need to provide
             // the loading with it's own bundle path location
             if (!Ogre::StringUtil::startsWith(archName, "/", false)) // only adjust relative dirs
                 archName = Ogre::String(m_ResourcePath + archName);
-#endif
+
             Ogre::ResourceGroupManager::getSingleton().addResourceLocation(archName, typeName, secName);
         }
     }
@@ -162,69 +131,6 @@ OgreFramework::~OgreFramework()
     if(m_pRoot)     delete m_pRoot;
 }
 
-bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
-{
-#if !defined(OGRE_IS_IOS)
-	
-	if(m_pKeyboard->isKeyDown(OIS::KC_ESCAPE))
-	{
-        m_bShutDownOgre = true;
-        return true;
-	}
-    
-	if(m_pKeyboard->isKeyDown(OIS::KC_SYSRQ))
-	{
-		m_pRenderWnd->writeContentsToTimestampedFile("BOF_Screenshot_", ".png");
-		return true;
-	}
-    
-	if(m_pKeyboard->isKeyDown(OIS::KC_M))
-	{
-		static int mode = 0;
-		
-		if(mode == 2)
-		{
-			m_pCamera->setPolygonMode(PM_SOLID);
-			mode = 0;
-		}
-		else if(mode == 0)
-		{
-            m_pCamera->setPolygonMode(PM_WIREFRAME);
-            mode = 1;
-		}
-		else if(mode == 1)
-		{
-			m_pCamera->setPolygonMode(PM_POINTS);
-			mode = 2;
-		}
-	}
-    
-	if(m_pKeyboard->isKeyDown(OIS::KC_O))
-	{
-		if(m_pTrayMgr->isLogoVisible())
-        {
-            m_pTrayMgr->hideLogo();
-            m_pTrayMgr->hideFrameStats();
-        }
-        else
-        {
-            m_pTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-            m_pTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-        }
-	}
-    
-#endif
-	return true;
-}
-
-bool OgreFramework::keyReleased(const OIS::KeyEvent &keyEventRef)
-{
-	return true;
-}
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
-#if defined(OGRE_IS_IOS)
 bool OgreFramework::touchMoved(const OIS::MultiTouchEvent &evt)
 {
     OIS::MultiTouchState state = evt.state;
@@ -258,15 +164,11 @@ bool OgreFramework::touchMoved(const OIS::MultiTouchEvent &evt)
 	return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool OgreFramework::touchPressed(const OIS:: MultiTouchEvent &evt)
 {
 #pragma unused(evt)
 	return true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 bool OgreFramework::touchReleased(const OIS:: MultiTouchEvent &evt)
 {
@@ -279,25 +181,6 @@ bool OgreFramework::touchCancelled(const OIS:: MultiTouchEvent &evt)
 #pragma unused(evt)
 	return true;
 }
-#else
-bool OgreFramework::mouseMoved(const OIS::MouseEvent &evt)
-{
-	m_pCamera->yaw(Degree(evt.state.X.rel * -0.1f));
-	m_pCamera->pitch(Degree(evt.state.Y.rel * -0.1f));
-	
-	return true;
-}
-
-bool OgreFramework::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
-{
-	return true;
-}
-
-bool OgreFramework::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
-{
-	return true;
-}
-#endif
 
 void OgreFramework::updateOgre(double timeSinceLastFrame)
 {
