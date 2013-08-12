@@ -18,8 +18,8 @@
 		CBC848EA17B8C8AC006EE867 /* ogre.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CBC848E917B8C8AC006EE867 /* ogre.cfg */; };
 		CBC848EC17B8C8AC006EE867 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CBC848EB17B8C8AC006EE867 /* plugins.cfg */; };
 		CBC848EE17B8C8AC006EE867 /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CBC848ED17B8C8AC006EE867 /* resources.cfg */; };
-		CBC848F817B8CE41006EE867 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC848F717B8CE41006EE867 /* AppDelegate.mm */; };
-		CBC848FC17B8D509006EE867 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC848FA17B8D509006EE867 /* ViewController.m */; };
+		CBC848F817B8CE41006EE867 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC848F717B8CE41006EE867 /* AppDelegate.m */; };
+		CBC848FC17B8D509006EE867 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC848FA17B8D509006EE867 /* ViewController.mm */; };
 		CBC848FD17B8D509006EE867 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC848FB17B8D509006EE867 /* ViewController.xib */; };
 		CBC8490417B8E64B006EE867 /* OgreView.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC8490317B8E64B006EE867 /* OgreView.mm */; };
 /* End PBXBuildFile section */
@@ -101,9 +101,9 @@
 		CBC848E917B8C8AC006EE867 /* ogre.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = ogre.cfg; sourceTree = "<group>"; };
 		CBC848EB17B8C8AC006EE867 /* plugins.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = plugins.cfg; sourceTree = "<group>"; };
 		CBC848ED17B8C8AC006EE867 /* resources.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources.cfg; sourceTree = "<group>"; };
-		CBC848F717B8CE41006EE867 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = AppDelegate.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		CBC848F717B8CE41006EE867 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CBC848F917B8D509006EE867 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CBC848FA17B8D509006EE867 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CBC848FA17B8D509006EE867 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		CBC848FB17B8D509006EE867 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		CBC8490217B8E64B006EE867 /* OgreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreView.h; sourceTree = "<group>"; };
 		CBC8490317B8E64B006EE867 /* OgreView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreView.mm; sourceTree = "<group>"; };
@@ -159,10 +159,10 @@
 			children = (
 				CBC8489D17B8C8AB006EE867 /* OgreApplication.cpp */,
 				CBC8489F17B8C8AB006EE867 /* OgreApplication.h */,
-				CBC848F717B8CE41006EE867 /* AppDelegate.mm */,
+				CBC848F717B8CE41006EE867 /* AppDelegate.m */,
 				CBC8489C17B8C8AB006EE867 /* AppDelegate.h */,
 				CBC848F917B8D509006EE867 /* ViewController.h */,
-				CBC848FA17B8D509006EE867 /* ViewController.m */,
+				CBC848FA17B8D509006EE867 /* ViewController.mm */,
 				CBC848FB17B8D509006EE867 /* ViewController.xib */,
 				CBC8490217B8E64B006EE867 /* OgreView.h */,
 				CBC8490317B8E64B006EE867 /* OgreView.mm */,
@@ -401,8 +401,8 @@
 			files = (
 				CBC8489A17B8C8AB006EE867 /* main.mm in Sources */,
 				CBC8489E17B8C8AB006EE867 /* OgreApplication.cpp in Sources */,
-				CBC848F817B8CE41006EE867 /* AppDelegate.mm in Sources */,
-				CBC848FC17B8D509006EE867 /* ViewController.m in Sources */,
+				CBC848F817B8CE41006EE867 /* AppDelegate.m in Sources */,
+				CBC848FC17B8D509006EE867 /* ViewController.mm in Sources */,
 				CBC8490417B8E64B006EE867 /* OgreView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

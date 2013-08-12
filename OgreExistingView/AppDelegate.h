@@ -14,13 +14,10 @@
 //   0. You just DO WHAT THE FUCK YOU WANT TO.
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
 @class ViewController;
 
 @interface AppDelegate : NSObject <UIApplicationDelegate>
-
-- (void)renderOneFrame:(id)sender;
 
 @property (strong, nonatomic) UIWindow* mWindow;
 @property (strong, nonatomic) ViewController* mViewController;

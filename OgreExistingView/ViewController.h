@@ -17,4 +17,7 @@
 
 @interface ViewController : UIViewController
 
+- (void)startWithWindow:(UIWindow*) window;
+- (void)update:(id)sender;
+- (void)stop;
 @end

@@ -53,6 +53,11 @@ void OgreApplication::start(void* uiWindow, void* uiView, void* uiViewController
     mTimer.reset();
     
 	mRenderWindow->setActive(true);
+    
+    mRoot->getRenderSystem()->_initRenderTargets();
+    
+    // Clear event times
+    mRoot->clearEventTimes();
 }
 
 bool OgreApplication::isStarted()
@@ -214,6 +219,8 @@ void OgreApplication::initializeRenderer(void* uiWindow, void* uiView, void* uiV
 
 void OgreApplication::terminateRenderer()
 {
+    mRoot->queueEndRendering();
+    
     m_StaticPluginLoader.unload();
     
     delete mRoot;
