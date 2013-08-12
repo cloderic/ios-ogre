@@ -38,7 +38,6 @@
 		CBC8489F17B8C8AB006EE867 /* OgreDemoApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OgreDemoApp.h; sourceTree = "<group>"; };
 		CBC848A017B8C8AB006EE867 /* OgreFramework.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OgreFramework.cpp; sourceTree = "<group>"; };
 		CBC848A217B8C8AB006EE867 /* OgreFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OgreFramework.h; sourceTree = "<group>"; };
-		CBC848A317B8C8AB006EE867 /* OgreStaticPluginLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OgreStaticPluginLoader.h; sourceTree = "<group>"; };
 		CBC848A817B8C8AC006EE867 /* Examples.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Examples.material; sourceTree = "<group>"; };
 		CBC848A917B8C8AC006EE867 /* Ogre.material */ = {isa = PBXFileReference; lastKnownFileType = text; path = Ogre.material; sourceTree = "<group>"; };
 		CBC848AB17B8C8AC006EE867 /* GreenSkin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GreenSkin.jpg; sourceTree = "<group>"; };
@@ -179,7 +178,6 @@
 				CBC8489F17B8C8AB006EE867 /* OgreDemoApp.h */,
 				CBC848A017B8C8AB006EE867 /* OgreFramework.cpp */,
 				CBC848A217B8C8AB006EE867 /* OgreFramework.h */,
-				CBC848A317B8C8AB006EE867 /* OgreStaticPluginLoader.h */,
 			);
 			name = "Basic Ogre Framework";
 			sourceTree = "<group>";
