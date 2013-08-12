@@ -145,6 +145,13 @@
     camera.velocity.z = - 0.7f * sender.velocity;
     mApplication.pushCamera(camera);
 }
+
+- (IBAction)rotate:(UIRotationGestureRecognizer *)sender
+{
+    Camera camera;
+    mApplication.pullCamera(camera);
+    camera.roll += Ogre::Radian(sender.rotation);
+    sender.rotation = 0.f;
     mApplication.pushCamera(camera);
 }
 @end

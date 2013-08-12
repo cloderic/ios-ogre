@@ -56,6 +56,10 @@ protected:
 struct Camera
 {
     Ogre::Vector3 velocity; // Current camera velocity in its local coordinate system.
+    
+    Ogre::Radian roll;
+    Ogre::Radian pitch;
+    Ogre::Radian yaw;
 };
 
 class OgreApplication
