@@ -17,14 +17,12 @@
 
 #import "ViewController.h"
 #import "OgreView.h"
-
-#include "OgreFramework.h"
-#include "OgreDemoApp.h"
+#import "OgreApplication.h"
 
 // private category
 @interface AppDelegate ()
 {
-    DemoApp mDemo;
+    OgreApplication mApplication;
     // Use of the CADisplayLink class is the preferred method for controlling your animation timing.
     // CADisplayLink will link to the main display and fire every vsync when added to a given run-loop.
     // The NSTimer class is used only as fallback when running on a pre 3.1 device where CADisplayLink
@@ -57,7 +55,7 @@
     
     try
     {
-        mDemo.startDemo(self.mWindow, ogreView, self.mViewController, width, height);
+        mApplication.start(self.mWindow, ogreView, self.mViewController, width, height);
         
         Ogre::Root::getSingleton().getRenderSystem()->_initRenderTargets();
         
@@ -115,19 +113,16 @@
 
 - (void)renderOneFrame:(id)sender
 {
-    if(!OgreFramework::getSingletonPtr()->isOgreToBeShutDown() &&
-       Ogre::Root::getSingletonPtr() && Ogre::Root::getSingleton().isInitialised())
+    if(mApplication.isStarted())
     {
-		if(OgreFramework::getSingletonPtr()->m_pRenderWnd->isActive())
+		if(mApplication.mRenderWindow->isActive())
 		{
-			mStartTime = OgreFramework::getSingletonPtr()->m_pTimer->getMillisecondsCPU();
+			mStartTime = mApplication.mTimer.getMillisecondsCPU();
             
-			OgreFramework::getSingletonPtr()->m_pMouse->capture();
+			mApplication.update(mLastFrameTime);
+			mApplication.draw();
             
-			OgreFramework::getSingletonPtr()->updateOgre(mLastFrameTime);
-			OgreFramework::getSingletonPtr()->m_pRoot->renderOneFrame();
-            
-			mLastFrameTime = OgreFramework::getSingletonPtr()->m_pTimer->getMillisecondsCPU() - mStartTime;
+			mLastFrameTime = mApplication.mTimer.getMillisecondsCPU() - mStartTime;
 		}
     }
     else
