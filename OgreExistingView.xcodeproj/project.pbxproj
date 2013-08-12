@@ -435,6 +435,7 @@
 					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib/release\"",
 					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib\"",
 				);
+				OGRE_SDK_ROOT = "$(PROJECT_DIR)/../3rd-party/OgreSDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -461,6 +462,7 @@
 					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib/release\"",
 					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib\"",
 				);
+				OGRE_SDK_ROOT = "$(PROJECT_DIR)/../3rd-party/OgreSDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
