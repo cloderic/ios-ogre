@@ -19,6 +19,7 @@
 		CBC848EA17B8C8AC006EE867 /* ogre.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CBC848E917B8C8AC006EE867 /* ogre.cfg */; };
 		CBC848EC17B8C8AC006EE867 /* plugins.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CBC848EB17B8C8AC006EE867 /* plugins.cfg */; };
 		CBC848EE17B8C8AC006EE867 /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CBC848ED17B8C8AC006EE867 /* resources.cfg */; };
+		CBC848F817B8CE41006EE867 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC848F717B8CE41006EE867 /* AppDelegate.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,6 +102,7 @@
 		CBC848E917B8C8AC006EE867 /* ogre.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = ogre.cfg; sourceTree = "<group>"; };
 		CBC848EB17B8C8AC006EE867 /* plugins.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = plugins.cfg; sourceTree = "<group>"; };
 		CBC848ED17B8C8AC006EE867 /* resources.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; path = resources.cfg; sourceTree = "<group>"; };
+		CBC848F717B8CE41006EE867 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +153,9 @@
 		CBC8489217B8C8AB006EE867 /* OgreExistingView */ = {
 			isa = PBXGroup;
 			children = (
-				CBC8489617B8C8AB006EE867 /* InfoPlist.strings */,
 				CBC8489917B8C8AB006EE867 /* main.mm */,
+				CBC848F617B8CD4E006EE867 /* Host application */,
+				CBC8489617B8C8AB006EE867 /* InfoPlist.strings */,
 				CBC8489B17B8C8AB006EE867 /* Basic Ogre Framework */,
 				CBC848A417B8C8AC006EE867 /* Resources */,
 				CBC8489317B8C8AB006EE867 /* Supporting Files */,
@@ -172,7 +175,6 @@
 		CBC8489B17B8C8AB006EE867 /* Basic Ogre Framework */ = {
 			isa = PBXGroup;
 			children = (
-				CBC8489C17B8C8AB006EE867 /* AppDelegate.h */,
 				CBC8489D17B8C8AB006EE867 /* OgreDemoApp.cpp */,
 				CBC8489F17B8C8AB006EE867 /* OgreDemoApp.h */,
 				CBC848A017B8C8AB006EE867 /* OgreFramework.cpp */,
@@ -316,6 +318,15 @@
 			path = materials;
 			sourceTree = "<group>";
 		};
+		CBC848F617B8CD4E006EE867 /* Host application */ = {
+			isa = PBXGroup;
+			children = (
+				CBC848F717B8CE41006EE867 /* AppDelegate.mm */,
+				CBC8489C17B8C8AB006EE867 /* AppDelegate.h */,
+			);
+			name = "Host application";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -400,6 +411,7 @@
 				CBC8489A17B8C8AB006EE867 /* main.mm in Sources */,
 				CBC8489E17B8C8AB006EE867 /* OgreDemoApp.cpp in Sources */,
 				CBC848A117B8C8AB006EE867 /* OgreFramework.cpp in Sources */,
+				CBC848F817B8CE41006EE867 /* AppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
