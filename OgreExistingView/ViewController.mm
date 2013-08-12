@@ -64,8 +64,6 @@
     unsigned int width  = view.frame.size.width;
     unsigned int height = view.frame.size.height;
     
-    //UIWindow* window = self.view.window;
-    
     OgreView* ogreView = [[OgreView alloc] initWithFrame:CGRectMake(0,0,width,height)];
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
@@ -130,9 +128,23 @@
 			mApplication.update(mLastFrameTime);
 			mApplication.draw();
             
-			mLastFrameTime = mApplication.mTimer.getMillisecondsCPU() - mStartTime;
+            Camera camera;
+            mApplication.pullCamera(camera);
+            camera.velocity *= 0.95f;
+            mApplication.pushCamera(camera);
+            
+            mLastFrameTime = mApplication.mTimer.getMillisecondsCPU() - mStartTime;
 		}
     }
 }
 
+- (IBAction)pinch:(UIPinchGestureRecognizer *)sender
+{
+    Camera camera;
+    mApplication.pullCamera(camera);
+    camera.velocity.z = - 0.7f * sender.velocity;
+    mApplication.pushCamera(camera);
+}
+    mApplication.pushCamera(camera);
+}
 @end

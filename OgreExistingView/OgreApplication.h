@@ -53,6 +53,11 @@ protected:
 	Ogre::RTShader::ShaderGenerator* mShaderGenerator;			// The shader generator instance.		
 };
 
+struct Camera
+{
+    Ogre::Vector3 velocity; // Current camera velocity in its local coordinate system.
+};
+
 class OgreApplication
 {
 public:
@@ -65,6 +70,9 @@ public:
     
     void update(double timeSinceLastFrame);
     void draw();
+    
+    void pullCamera(Camera& camera) const;
+    void pushCamera(const Camera& camera);
     
     Ogre::Timer mTimer;
     
@@ -96,9 +104,9 @@ private:
 	Ogre::SceneManager* mSceneManager;
 	
 	Ogre::Camera* mCamera;
+    Ogre::Vector3 mCameraVelocity;
 	Ogre::Viewport* mViewport;
-	
-    
+
     Ogre::String mResourcesRoot;
     
     Ogre::FrameEvent m_FrameEvent;
@@ -106,11 +114,6 @@ private:
     
 	bool m_bShutDownOgre;
 	
-	Ogre::Vector3 m_TranslateVector;
-	Ogre::Real m_MoveSpeed;
-	Ogre::Degree m_RotateSpeed;
-	float m_MoveScale;
-	Ogre::Degree m_RotScale;
     Ogre::StaticPluginLoader m_StaticPluginLoader;
 };
 

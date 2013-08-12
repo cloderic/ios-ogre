@@ -18,11 +18,11 @@
 #include <macUtils.h>
 
 OgreApplication::OgreApplication()
+: mCameraVelocity(Ogre::Vector3::ZERO)
 {
 	mHeadNode		= 0;
 	mHeadEntity   = 0;
-    m_MoveSpeed     = 0.1f;
-	m_RotateSpeed   = 0.3f;
+    
     
 	mRoot				= 0;
 	mSceneManager			= 0;
@@ -74,14 +74,9 @@ void OgreApplication::stop()
 
 void OgreApplication::update(double timeSinceLastFrame)
 {
-    m_MoveScale = m_MoveSpeed   * (float)timeSinceLastFrame;
-	m_RotScale  = m_RotateSpeed * (float)timeSinceLastFrame;
-    
     mSceneManager->setSkyBoxEnabled(true);
     
-	m_TranslateVector = Ogre::Vector3::ZERO;
-    
-	mCamera->moveRelative(m_TranslateVector / 10);
+    mCamera->moveRelative(mCameraVelocity * timeSinceLastFrame);
     
 	m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;
 }
@@ -89,6 +84,16 @@ void OgreApplication::update(double timeSinceLastFrame)
 void OgreApplication::draw()
 {
     mRoot->renderOneFrame();
+}
+
+void OgreApplication::pullCamera(Camera& camera) const
+{
+    camera.velocity = mCameraVelocity;
+}
+
+void OgreApplication::pushCamera(const Camera& camera)
+{
+    mCameraVelocity = camera.velocity;
 }
 
 bool OgreApplication::initializeRTShaderSystem()

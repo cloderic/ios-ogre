@@ -20,4 +20,6 @@
 - (void)startWithWindow:(UIWindow*) window;
 - (void)update:(id)sender;
 - (void)stop;
+- (IBAction)pinch:(UIPinchGestureRecognizer *)sender;
+
 @end
