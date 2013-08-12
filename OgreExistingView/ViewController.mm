@@ -37,6 +37,8 @@
 
 @implementation ViewController
 
+@synthesize mOgreView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,7 +66,7 @@
     unsigned int width  = view.frame.size.width;
     unsigned int height = view.frame.size.height;
     
-    OgreView* ogreView = [[OgreView alloc] initWithFrame:CGRectMake(0,0,width,height)];
+    mOgreView = [[OgreView alloc] initWithFrame:CGRectMake(0,0,width,height)];
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     mLastFrameTime = 1;
@@ -72,7 +74,7 @@
     
     try
     {
-        mApplication.start(window, ogreView, self, width, height);
+        mApplication.start(window, mOgreView, self, width, height);
     }
     catch( Ogre::Exception& e )
     {
@@ -83,7 +85,7 @@
     // Call made here to override Ogre set view controller (cf. http://www.ogre3d.org/forums/viewtopic.php?f=2&t=71508&p=468814&hilit=externalviewhandle#p468814)
     window.rootViewController = self;
     
-    [view addSubview:ogreView];
+    [view addSubview:mOgreView];
     
     // CADisplayLink is API new to iPhone SDK 3.1. Compiling against earlier versions will result in a warning, but can be dismissed
     // if the system version runtime check for CADisplayLink exists in -initWithCoder:. The runtime check ensures this code will
@@ -153,5 +155,28 @@
     camera.roll += Ogre::Radian(sender.rotation);
     sender.rotation = 0.f;
     mApplication.pushCamera(camera);
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if(mApplication.mRenderWindow != NULL)
+    {
+        unsigned int width  = self.view.bounds.size.width;
+        unsigned int height = self.view.bounds.size.height;
+        
+        // Resize the view
+        mOgreView.frame = CGRectMake(0,0,width,height);
+        
+        // Resize the window
+        mApplication.mRenderWindow->resize(width, height);
+        
+        // After rotation the aspect ratio of the viewport has changed, update that as well.
+        if(mApplication.mRenderWindow->getNumViewports() > 0)
+        {
+            Ogre::Viewport *viewPort = mApplication.mRenderWindow->getViewport(0);
+            viewPort->getCamera()->setAspectRatio((Ogre::Real) width / (Ogre::Real) height);
+        }
+    }
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 @end

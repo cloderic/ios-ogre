@@ -15,7 +15,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class OgreView;
+
 @interface ViewController : UIViewController
+
+@property (retain) OgreView* mOgreView;
 
 - (void)startWithWindow:(UIWindow*) window;
 - (void)update:(id)sender;
