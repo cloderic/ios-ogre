@@ -1,0 +1,361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB4C9C7817B94CBA005A816F /* media in Resources */ = {isa = PBXBuildFile; fileRef = CB4C9C7517B94CBA005A816F /* media */; };
+		CB4C9C7917B94CBA005A816F /* ogre.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CB4C9C7617B94CBA005A816F /* ogre.cfg */; };
+		CB4C9C7A17B94CBA005A816F /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CB4C9C7717B94CBA005A816F /* resources.cfg */; };
+		CBC8488917B8C8AB006EE867 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488817B8C8AB006EE867 /* CoreGraphics.framework */; };
+		CBC8488B17B8C8AB006EE867 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488A17B8C8AB006EE867 /* Foundation.framework */; };
+		CBC8488D17B8C8AB006EE867 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488C17B8C8AB006EE867 /* OpenGLES.framework */; };
+		CBC8488F17B8C8AB006EE867 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488E17B8C8AB006EE867 /* QuartzCore.framework */; };
+		CBC8489117B8C8AB006EE867 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8489017B8C8AB006EE867 /* UIKit.framework */; };
+		CBC8489817B8C8AB006EE867 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBC8489617B8C8AB006EE867 /* InfoPlist.strings */; };
+		CBC8489A17B8C8AB006EE867 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC8489917B8C8AB006EE867 /* main.mm */; };
+		CBC8489E17B8C8AB006EE867 /* OgreApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CBC8489D17B8C8AB006EE867 /* OgreApplication.cpp */; };
+		CBC848F817B8CE41006EE867 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC848F717B8CE41006EE867 /* AppDelegate.m */; };
+		CBC848FC17B8D509006EE867 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC848FA17B8D509006EE867 /* ViewController.mm */; };
+		CBC848FD17B8D509006EE867 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC848FB17B8D509006EE867 /* ViewController.xib */; };
+		CBC8490417B8E64B006EE867 /* OgreView.mm in Sources */ = {isa = PBXBuildFile; fileRef = CBC8490317B8E64B006EE867 /* OgreView.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CB4C9C7517B94CBA005A816F /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = resources/media; sourceTree = "<group>"; };
+		CB4C9C7617B94CBA005A816F /* ogre.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ogre.cfg; path = resources/ogre.cfg; sourceTree = "<group>"; };
+		CB4C9C7717B94CBA005A816F /* resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = resources.cfg; path = resources/resources.cfg; sourceTree = "<group>"; };
+		CBC8488517B8C8AB006EE867 /* ios-ogre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-ogre.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBC8488817B8C8AB006EE867 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CBC8488A17B8C8AB006EE867 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CBC8488C17B8C8AB006EE867 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		CBC8488E17B8C8AB006EE867 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CBC8489017B8C8AB006EE867 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CBC8489417B8C8AB006EE867 /* ios-ogre-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-ogre-Prefix.pch"; sourceTree = "<group>"; };
+		CBC8489517B8C8AB006EE867 /* ios-ogre-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ios-ogre-Info.plist"; sourceTree = "<group>"; };
+		CBC8489717B8C8AB006EE867 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CBC8489917B8C8AB006EE867 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		CBC8489C17B8C8AB006EE867 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CBC8489D17B8C8AB006EE867 /* OgreApplication.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = OgreApplication.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		CBC8489F17B8C8AB006EE867 /* OgreApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OgreApplication.h; sourceTree = "<group>"; };
+		CBC848F717B8CE41006EE867 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		CBC848F917B8D509006EE867 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CBC848FA17B8D509006EE867 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		CBC848FB17B8D509006EE867 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		CBC8490217B8E64B006EE867 /* OgreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OgreView.h; sourceTree = "<group>"; };
+		CBC8490317B8E64B006EE867 /* OgreView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OgreView.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CBC8488117B8C8AB006EE867 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBC8488917B8C8AB006EE867 /* CoreGraphics.framework in Frameworks */,
+				CBC8488B17B8C8AB006EE867 /* Foundation.framework in Frameworks */,
+				CBC8488D17B8C8AB006EE867 /* OpenGLES.framework in Frameworks */,
+				CBC8488F17B8C8AB006EE867 /* QuartzCore.framework in Frameworks */,
+				CBC8489117B8C8AB006EE867 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB4C9C7417B94CA0005A816F /* data */ = {
+			isa = PBXGroup;
+			children = (
+				CB4C9C7517B94CBA005A816F /* media */,
+				CB4C9C7617B94CBA005A816F /* ogre.cfg */,
+				CB4C9C7717B94CBA005A816F /* resources.cfg */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
+		CBC8487B17B8C8AB006EE867 = {
+			isa = PBXGroup;
+			children = (
+				CBC8489D17B8C8AB006EE867 /* OgreApplication.cpp */,
+				CBC8489F17B8C8AB006EE867 /* OgreApplication.h */,
+				CBC848F717B8CE41006EE867 /* AppDelegate.m */,
+				CBC8489C17B8C8AB006EE867 /* AppDelegate.h */,
+				CBC848F917B8D509006EE867 /* ViewController.h */,
+				CBC848FA17B8D509006EE867 /* ViewController.mm */,
+				CBC848FB17B8D509006EE867 /* ViewController.xib */,
+				CBC8490217B8E64B006EE867 /* OgreView.h */,
+				CBC8490317B8E64B006EE867 /* OgreView.mm */,
+				CBC8489917B8C8AB006EE867 /* main.mm */,
+				CBC8489617B8C8AB006EE867 /* InfoPlist.strings */,
+				CBC8489317B8C8AB006EE867 /* Supporting Files */,
+				CB4C9C7417B94CA0005A816F /* data */,
+				CBC8488717B8C8AB006EE867 /* Frameworks */,
+				CBC8488617B8C8AB006EE867 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CBC8488617B8C8AB006EE867 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CBC8488517B8C8AB006EE867 /* ios-ogre.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CBC8488717B8C8AB006EE867 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBC8488817B8C8AB006EE867 /* CoreGraphics.framework */,
+				CBC8488A17B8C8AB006EE867 /* Foundation.framework */,
+				CBC8488C17B8C8AB006EE867 /* OpenGLES.framework */,
+				CBC8488E17B8C8AB006EE867 /* QuartzCore.framework */,
+				CBC8489017B8C8AB006EE867 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CBC8489317B8C8AB006EE867 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CBC8489417B8C8AB006EE867 /* ios-ogre-Prefix.pch */,
+				CBC8489517B8C8AB006EE867 /* ios-ogre-Info.plist */,
+			);
+			name = "Supporting Files";
+			path = OgreExistingView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CBC8488417B8C8AB006EE867 /* ios-ogre */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBC848F117B8C8AC006EE867 /* Build configuration list for PBXNativeTarget "ios-ogre" */;
+			buildPhases = (
+				CBC8488017B8C8AB006EE867 /* Sources */,
+				CBC8488117B8C8AB006EE867 /* Frameworks */,
+				CBC8488217B8C8AB006EE867 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ios-ogre";
+			productName = OgreExistingView;
+			productReference = CBC8488517B8C8AB006EE867 /* ios-ogre.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CBC8487C17B8C8AB006EE867 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = CBC8487F17B8C8AB006EE867 /* Build configuration list for PBXProject "ios-ogre" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CBC8487B17B8C8AB006EE867;
+			productRefGroup = CBC8488617B8C8AB006EE867 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CBC8488417B8C8AB006EE867 /* ios-ogre */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CBC8488217B8C8AB006EE867 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBC8489817B8C8AB006EE867 /* InfoPlist.strings in Resources */,
+				CBC848FD17B8D509006EE867 /* ViewController.xib in Resources */,
+				CB4C9C7817B94CBA005A816F /* media in Resources */,
+				CB4C9C7917B94CBA005A816F /* ogre.cfg in Resources */,
+				CB4C9C7A17B94CBA005A816F /* resources.cfg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CBC8488017B8C8AB006EE867 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBC8489A17B8C8AB006EE867 /* main.mm in Sources */,
+				CBC8489E17B8C8AB006EE867 /* OgreApplication.cpp in Sources */,
+				CBC848F817B8CE41006EE867 /* AppDelegate.m in Sources */,
+				CBC848FC17B8D509006EE867 /* ViewController.mm in Sources */,
+				CBC8490417B8E64B006EE867 /* OgreView.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CBC8489617B8C8AB006EE867 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CBC8489717B8C8AB006EE867 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CBC848EF17B8C8AC006EE867 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = No;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OgreExistingView/OgreExistingView-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = No;
+				GCC_THUMB_SUPPORT = "";
+				INFOPLIST_FILE = "OgreExistingView/OgreExistingView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(OGRE_SDK_ROOT)/lib/Release\"",
+					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib/release\"",
+					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib\"",
+				);
+				OGRE_SDK_ROOT = "$(PROJECT_DIR)/../3rd-party/OgreSDK";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CBC848F017B8C8AC006EE867 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_INLINES_ARE_PRIVATE_EXTERN = No;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "OgreExistingView/OgreExistingView-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = No;
+				GCC_THUMB_SUPPORT = "";
+				INFOPLIST_FILE = "OgreExistingView/OgreExistingView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(OGRE_SDK_ROOT)/lib/Release\"",
+					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib/release\"",
+					"\"$(OGRE_SDK_ROOT)/iOSDependencies/lib\"",
+				);
+				OGRE_SDK_ROOT = "$(PROJECT_DIR)/../3rd-party/OgreSDK";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CBC848F217B8C8AC006EE867 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "ios-ogre-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(OGRE_SDK_ROOT)/include/OGRE\"",
+					"\"$(OGRE_SDK_ROOT)/include/OGRE/RenderSystems/GLES2\"",
+					"\"$(OGRE_SDK_ROOT)/include/OGRE/RTShaderSystem\"",
+					"\"$(OGRE_SDK_ROOT)/include/OGRE/iOS\"",
+					"\"$(OGRE_SDK_ROOT)/include\"",
+					"\"$(OGRE_SDK_ROOT)/include/OIS\"",
+					"\"$(OGRE_SDK_ROOT)/iOSDependencies/include\"",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/ios-ogre-Info.plist";
+				OTHER_CFLAGS = "-DOGRE_USE_GLES2=1";
+				OTHER_LDFLAGS = (
+					"-lOIS",
+					"-lOgreMainStatic",
+					"-lRenderSystem_GLES2Static",
+					"-lOgreRTShaderSystemStatic",
+					"-lmesaglsl2",
+					"-lboost_system",
+					"-lboost_chrono",
+					"-lboost_date_time",
+					"-lboost_thread",
+					"-lFreeType",
+					"-lFreeImage",
+					"-lzzip",
+					"-lz",
+				);
+				PRODUCT_NAME = "ios-ogre";
+			};
+			name = Debug;
+		};
+		CBC848F317B8C8AC006EE867 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "ios-ogre-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(OGRE_SDK_ROOT)/include/OGRE\"",
+					"\"$(OGRE_SDK_ROOT)/include/OGRE/RenderSystems/GLES2\"",
+					"\"$(OGRE_SDK_ROOT)/include/OGRE/RTShaderSystem\"",
+					"\"$(OGRE_SDK_ROOT)/include/OGRE/iOS\"",
+					"\"$(OGRE_SDK_ROOT)/include\"",
+					"\"$(OGRE_SDK_ROOT)/include/OIS\"",
+					"\"$(OGRE_SDK_ROOT)/iOSDependencies/include\"",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/ios-ogre-Info.plist";
+				OTHER_CFLAGS = "-DOGRE_USE_GLES2=1";
+				OTHER_LDFLAGS = (
+					"-lOIS",
+					"-lOgreMainStatic",
+					"-lRenderSystem_GLES2Static",
+					"-lOgreRTShaderSystemStatic",
+					"-lmesaglsl2",
+					"-lboost_system",
+					"-lboost_chrono",
+					"-lboost_date_time",
+					"-lboost_thread",
+					"-lFreeType",
+					"-lFreeImage",
+					"-lzzip",
+					"-lz",
+				);
+				PRODUCT_NAME = "ios-ogre";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CBC8487F17B8C8AB006EE867 /* Build configuration list for PBXProject "ios-ogre" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBC848EF17B8C8AC006EE867 /* Debug */,
+				CBC848F017B8C8AC006EE867 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBC848F117B8C8AC006EE867 /* Build configuration list for PBXNativeTarget "ios-ogre" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBC848F217B8C8AC006EE867 /* Debug */,
+				CBC848F317B8C8AC006EE867 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CBC8487C17B8C8AB006EE867 /* Project object */;
+}
