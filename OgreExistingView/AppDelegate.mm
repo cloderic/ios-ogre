@@ -24,33 +24,19 @@
 // private category
 @interface AppDelegate ()
 {
-    DemoApp demo;
+    DemoApp mDemo;
+    // Use of the CADisplayLink class is the preferred method for controlling your animation timing.
+    // CADisplayLink will link to the main display and fire every vsync when added to a given run-loop.
+    // The NSTimer class is used only as fallback when running on a pre 3.1 device where CADisplayLink
+    // isn't available.
+    CADisplayLink* mDisplayLink;
+    NSDate *mDate;
+    double mLastFrameTime;
+    double mStartTime;
 }
 @end
 
 @implementation AppDelegate
-
-@dynamic mLastFrameTime;
-@dynamic mStartTime;
-
-- (double)mLastFrameTime
-{
-    return mLastFrameTime;
-}
-
-- (void)setLastFrameTime:(double)frameInterval
-{
-    // Frame interval defines how many display frames must pass between each time the
-    // display link fires. The display link will only fire 30 times a second when the
-    // frame internal is two on a display that refreshes 60 times a second. The default
-    // frame interval setting of one will fire 60 times a second when the display refreshes
-    // at 60 times a second. A frame interval setting of less than one results in undefined
-    // behavior.
-    if (frameInterval >= 1)
-    {
-        mLastFrameTime = frameInterval;
-    }
-}
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
@@ -71,7 +57,7 @@
     
     try
     {
-        demo.startDemo(self.mWindow, ogreView, self.mViewController, width, height);
+        mDemo.startDemo(self.mWindow, ogreView, self.mViewController, width, height);
         
         Ogre::Root::getSingleton().getRenderSystem()->_initRenderTargets();
         
