@@ -19,6 +19,7 @@
 #import "OgreApplication.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import <CoreMotion/CoreMotion.h>
 
 // private category
 @interface ViewController ()
@@ -32,18 +33,24 @@
     NSDate *mDate;
     double mLastFrameTime;
     double mStartTime;
+    // CoreMotion manager (for acccelerometer/compass/gyroscope informations)
+    CMMotionManager* mMotionManager;
 }
+
+@property (retain) CMAttitude* mReferenceAttitude;
+
 @end
 
 @implementation ViewController
 
 @synthesize mOgreView;
+@synthesize mReferenceAttitude;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        mReferenceAttitude = nil;
     }
     return self;
 }
@@ -87,6 +94,11 @@
     
     [view addSubview:mOgreView];
     
+    // Create a CMMotionManager
+    mMotionManager = [[CMMotionManager alloc] init];
+    
+    [self startMotionListener];
+    
     // CADisplayLink is API new to iPhone SDK 3.1. Compiling against earlier versions will result in a warning, but can be dismissed
     // if the system version runtime check for CADisplayLink exists in -initWithCoder:. The runtime check ensures this code will
     // not be called in system versions earlier than 3.1.
@@ -102,6 +114,8 @@
 
 - (void)stop
 {
+    [self stopMotionListener];
+    
     try
     {
         mApplication.stop();
@@ -130,9 +144,43 @@
 			mApplication.update(mLastFrameTime);
 			mApplication.draw();
             
+            // Update the camera
             Camera camera;
+            
             mApplication.pullCamera(camera);
-            camera.velocity *= 0.95f;
+            camera.velocity *= 0.95f; // Decrease the linear velocity
+            if (mMotionManager.deviceMotionActive)
+            {
+                if (self.mReferenceAttitude)
+                {
+                    // Computing the attitude change since last sample
+                    CMAttitude* relativeAttitude = mMotionManager.deviceMotion.attitude;
+                    [relativeAttitude multiplyByInverseOfAttitude: self.mReferenceAttitude];
+                    switch (self.interfaceOrientation)
+                    {
+                        case UIInterfaceOrientationLandscapeLeft:
+                            camera.pitch += Ogre::Radian(relativeAttitude.roll);
+                            camera.yaw -= Ogre::Radian(relativeAttitude.pitch);
+                            break;
+                        case UIInterfaceOrientationLandscapeRight:
+                            camera.pitch -= Ogre::Radian(relativeAttitude.roll);
+                            camera.yaw += Ogre::Radian(relativeAttitude.pitch);
+                            break;
+                        case UIInterfaceOrientationPortraitUpsideDown:
+                            camera.pitch -= Ogre::Radian(relativeAttitude.pitch);
+                            camera.yaw -= Ogre::Radian(relativeAttitude.roll);
+                            break;
+                        case UIInterfaceOrientationPortrait:
+                        default:
+                            camera.pitch += Ogre::Radian(relativeAttitude.pitch);
+                            camera.yaw += Ogre::Radian(relativeAttitude.roll);
+                            break;
+                    }
+                }
+                // Taking a reference attitude
+                self.mReferenceAttitude = mMotionManager.deviceMotion.attitude;
+            }
+            
             mApplication.pushCamera(camera);
             
             mLastFrameTime = mApplication.mTimer.getMillisecondsCPU() - mStartTime;
@@ -157,6 +205,23 @@
     mApplication.pushCamera(camera);
 }
 
+- (void)startMotionListener
+{
+    [mMotionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryCorrectedZVertical];
+    self.mReferenceAttitude = nil;
+}
+
+- (void)stopMotionListener {
+    self.mReferenceAttitude = nil;
+    [mMotionManager stopDeviceMotionUpdates];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self stopMotionListener];
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if(mApplication.mRenderWindow != NULL)
@@ -178,5 +243,8 @@
         }
     }
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self startMotionListener];
 }
+
+
 @end

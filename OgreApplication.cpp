@@ -91,14 +91,14 @@ void OgreApplication::pullCamera(Camera& camera) const
     camera.velocity = mCameraVelocity;
     Ogre::Matrix3 orientation;
     mCamera->getOrientation().ToRotationMatrix(orientation);
-    orientation.ToEulerAnglesXYZ(camera.yaw, camera.pitch, camera.roll);
+    orientation.ToEulerAnglesYXZ(camera.yaw, camera.pitch, camera.roll);
 }
 
 void OgreApplication::pushCamera(const Camera& camera)
 {
     mCameraVelocity = camera.velocity;
     Ogre::Matrix3 orientation;
-    orientation.FromEulerAnglesXYZ(camera.yaw, camera.pitch, camera.roll);
+    orientation.FromEulerAnglesYXZ(camera.yaw, camera.pitch, camera.roll);
     mCamera->setOrientation(orientation);
 }
 

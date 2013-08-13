@@ -10,6 +10,7 @@
 		CB4C9C7817B94CBA005A816F /* media in Resources */ = {isa = PBXBuildFile; fileRef = CB4C9C7517B94CBA005A816F /* media */; };
 		CB4C9C7917B94CBA005A816F /* ogre.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CB4C9C7617B94CBA005A816F /* ogre.cfg */; };
 		CB4C9C7A17B94CBA005A816F /* resources.cfg in Resources */ = {isa = PBXBuildFile; fileRef = CB4C9C7717B94CBA005A816F /* resources.cfg */; };
+		CBB355E617BA0FFC00024882 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB355E517BA0FFC00024882 /* CoreMotion.framework */; };
 		CBC8488917B8C8AB006EE867 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488817B8C8AB006EE867 /* CoreGraphics.framework */; };
 		CBC8488B17B8C8AB006EE867 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488A17B8C8AB006EE867 /* Foundation.framework */; };
 		CBC8488D17B8C8AB006EE867 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8488C17B8C8AB006EE867 /* OpenGLES.framework */; };
@@ -28,6 +29,7 @@
 		CB4C9C7517B94CBA005A816F /* media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = media; path = resources/media; sourceTree = "<group>"; };
 		CB4C9C7617B94CBA005A816F /* ogre.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ogre.cfg; path = resources/ogre.cfg; sourceTree = "<group>"; };
 		CB4C9C7717B94CBA005A816F /* resources.cfg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = resources.cfg; path = resources/resources.cfg; sourceTree = "<group>"; };
+		CBB355E517BA0FFC00024882 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		CBC8488517B8C8AB006EE867 /* ios-ogre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-ogre.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8488817B8C8AB006EE867 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CBC8488A17B8C8AB006EE867 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB355E617BA0FFC00024882 /* CoreMotion.framework in Frameworks */,
 				CBC8488917B8C8AB006EE867 /* CoreGraphics.framework in Frameworks */,
 				CBC8488B17B8C8AB006EE867 /* Foundation.framework in Frameworks */,
 				CBC8488D17B8C8AB006EE867 /* OpenGLES.framework in Frameworks */,
@@ -107,6 +110,7 @@
 		CBC8488717B8C8AB006EE867 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBB355E517BA0FFC00024882 /* CoreMotion.framework */,
 				CBC8488817B8C8AB006EE867 /* CoreGraphics.framework */,
 				CBC8488A17B8C8AB006EE867 /* Foundation.framework */,
 				CBC8488C17B8C8AB006EE867 /* OpenGLES.framework */,

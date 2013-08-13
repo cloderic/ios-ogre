@@ -9,8 +9,7 @@ I relied mostly on Ogre's forum thread to make this work: this [one](http://www.
 ## Todo ##
 
 - Properly handling device orientation changes;
-- Add other *widgets* in the application to check that everything is working fine;
-- Add CoreMotion based controls.
+- Add other *widgets* in the application to check that everything is working fine.
 
 ## Building ##
 
