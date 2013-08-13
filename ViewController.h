@@ -26,5 +26,6 @@
 - (void)stop;
 - (IBAction)pinch:(UIPinchGestureRecognizer *)sender;
 - (IBAction)rotate:(UIRotationGestureRecognizer *)sender;
+- (IBAction)resetCameraButton:(UIButton *)sender;
 
 @end

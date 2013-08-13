@@ -93,6 +93,7 @@
     window.rootViewController = self;
     
     [view addSubview:mOgreView];
+    [view sendSubviewToBack:mOgreView];
     
     // Create a CMMotionManager
     mMotionManager = [[CMMotionManager alloc] init];
@@ -203,6 +204,11 @@
     camera.roll += Ogre::Radian(sender.rotation);
     sender.rotation = 0.f;
     mApplication.pushCamera(camera);
+}
+
+- (IBAction)resetCameraButton:(UIButton *)sender
+{
+    mApplication.resetCamera();
 }
 
 - (void)startMotionListener

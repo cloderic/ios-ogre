@@ -102,6 +102,14 @@ void OgreApplication::pushCamera(const Camera& camera)
     mCamera->setOrientation(orientation);
 }
 
+void OgreApplication::resetCamera()
+{
+    mCamera->setNearClipDistance(1);
+    mCamera->setPosition(Ogre::Vector3(0, 60, 60));
+	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	mCamera->setAspectRatio(Ogre::Real(mViewport->getActualWidth()) / Ogre::Real(mViewport->getActualHeight()));
+}
+
 bool OgreApplication::initializeRTShaderSystem()
 {
     if (Ogre::RTShader::ShaderGenerator::initialize())
@@ -279,14 +287,11 @@ void OgreApplication::createCameraAndViewport()
     OgreAssert(!mViewport, "Existing viewport");
 	
 	mCamera = mSceneManager->createCamera("Camera");
-	mCamera->setPosition(Ogre::Vector3(0, 60, 60));
-	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
-	mCamera->setNearClipDistance(1);
-    
+
 	mViewport = mRenderWindow->addViewport(mCamera);
 	mViewport->setBackgroundColour(Ogre::ColourValue(0.8f, 0.7f, 0.6f, 1.0f));
     
-	mCamera->setAspectRatio(Ogre::Real(mViewport->getActualWidth()) / Ogre::Real(mViewport->getActualHeight()));
+    resetCamera();
 	
 	mViewport->setCamera(mCamera);
 

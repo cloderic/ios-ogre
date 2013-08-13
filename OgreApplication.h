@@ -77,6 +77,7 @@ public:
     
     void pullCamera(Camera& camera) const;
     void pushCamera(const Camera& camera);
+    void resetCamera();
     
     Ogre::Timer mTimer;
     
