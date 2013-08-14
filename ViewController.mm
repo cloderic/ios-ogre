@@ -81,7 +81,7 @@
     
     try
     {
-        mApplication.start(window, mOgreView, self, width, height);
+        mApplication.start(window, mOgreView, width, height);
     }
     catch( Ogre::Exception& e )
     {
@@ -89,12 +89,21 @@
         e.getFullDescription().c_str() << std::endl;
     }
     
-    // Call made here to override Ogre set view controller (cf. http://www.ogre3d.org/forums/viewtopic.php?f=2&t=71508&p=468814&hilit=externalviewhandle#p468814)
+    // Ogre has created an EAGL2ViewController for the provided mOgreView
+    // and assigned it as the root view controller of the window
+    //
+    // Let's first retrieve it
+    UIViewController* ogreViewController = window.rootViewController;
+    NSAssert(ogreViewController.view == mOgreView, @"The created view controller owns the given view.");
+    
+    // I want to be the actual root view controller
     window.rootViewController = self;
     
-    [view addSubview:mOgreView];
-    [view sendSubviewToBack:mOgreView];
+    // but i want to add a child link with the ogre one
+    [self addChildViewController:ogreViewController];
     
+    [self.view addSubview:mOgreView];
+    [self.view sendSubviewToBack:mOgreView];
     // Create a CMMotionManager
     mMotionManager = [[CMMotionManager alloc] init];
     

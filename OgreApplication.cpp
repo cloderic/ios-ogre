@@ -39,9 +39,9 @@ OgreApplication::~OgreApplication()
     stop();
 }
 
-void OgreApplication::start(void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height)
+void OgreApplication::start(void* uiWindow, void* uiView, unsigned int width, unsigned int height)
 {
-    initializeRenderer(uiWindow, uiView, uiViewController, width, height);
+    initializeRenderer(uiWindow, uiView, width, height);
     createCameraAndViewport();
     
     loadResources();
@@ -211,7 +211,7 @@ void OgreApplication::terminateRTShaderSystem()
     }
 }
 
-void OgreApplication::initializeRenderer(void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height)
+void OgreApplication::initializeRenderer(void* uiWindow, void* uiView, unsigned int width, unsigned int height)
 {
     OgreAssert(!mRoot, "Existing root");
     OgreAssert(!mRenderWindow, "Existing render window");
@@ -227,13 +227,12 @@ void OgreApplication::initializeRenderer(void* uiWindow, void* uiView, void* uiV
     params["Video Mode"] = Ogre::StringConverter::toString(width) + "x" + Ogre::StringConverter::toString(height);
     params["externalWindowHandle"] = Ogre::StringConverter::toString((unsigned long)uiWindow);
     params["externalViewHandle"] = Ogre::StringConverter::toString((unsigned long)uiView);
-    params["externalViewController"] = Ogre::StringConverter::toString((unsigned long)uiViewController);
     
     // Initialize w/o creating a renderwindow.
     mRoot->initialise(false, "");
     
     // Create the window and attach it to the given UI stuffs.
-    mRenderWindow = mRoot->createRenderWindow("",width,height,true,&params);
+    mRenderWindow = mRoot->createRenderWindow("",width,height,false,&params);
     
     mSceneManager = mRoot->createSceneManager(Ogre::ST_GENERIC, "SceneManager");
 }

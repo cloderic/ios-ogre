@@ -68,7 +68,7 @@ public:
 	OgreApplication();
 	~OgreApplication();
     
-	void start(void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height);
+	void start(void* uiWindow, void* uiView, unsigned int width, unsigned int height);
     bool isStarted();
     void stop();
     
@@ -87,7 +87,7 @@ private:
     OgreApplication(const OgreApplication&);
 	OgreApplication& operator= (const OgreApplication&);
     
-    void initializeRenderer(void* uiWindow, void* uiView, void* uiViewController, unsigned int width, unsigned int height);
+    void initializeRenderer(void* uiWindow, void* uiView, unsigned int width, unsigned int height);
     void terminateRenderer();
     
     void loadResources();
