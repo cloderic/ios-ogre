@@ -20,8 +20,10 @@
 @interface OgreView : UIView
 {
     Ogre::String mWindowName;
+    Ogre::RenderWindow* mRenderWindow;
 }
 
 @property Ogre::String mWindowName;
+@property Ogre::RenderWindow* mRenderWindow;
 
 @end

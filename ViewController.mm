@@ -38,6 +38,7 @@
 }
 
 @property (retain) CMAttitude* mReferenceAttitude;
+@property (retain) OgreView* mOgreView;
 
 @end
 
@@ -69,11 +70,11 @@
 
 - (void)startWithWindow:(UIWindow*) window
 {
-    UIView* view = self.view;
-    unsigned int width  = view.frame.size.width;
-    unsigned int height = view.frame.size.height;
+    unsigned int width  = self.view.frame.size.width;
+    unsigned int height = self.view.frame.size.height;
     
     mOgreView = [[OgreView alloc] initWithFrame:CGRectMake(0,0,width,height)];
+    [self.view addSubview:mOgreView];
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     mLastFrameTime = 1;
@@ -89,12 +90,16 @@
         e.getFullDescription().c_str() << std::endl;
     }
     
+    // Linking the ogre view to the render window
+    mOgreView.mRenderWindow = mApplication.mRenderWindow;
+    
     // Ogre has created an EAGL2ViewController for the provided mOgreView
     // and assigned it as the root view controller of the window
     //
     // Let's first retrieve it
     UIViewController* ogreViewController = window.rootViewController;
-    NSAssert(ogreViewController.view == mOgreView, @"The created view controller owns the given view.");
+    NSAssert(ogreViewController.view == mOgreView, @"Ogre's created view controller owns the given view.");
+    NSAssert(ogreViewController.interfaceOrientation == self.interfaceOrientation, @"Ogre's view controller has the same device orientation");
     
     // I want to be the actual root view controller
     window.rootViewController = self;
@@ -102,8 +107,21 @@
     // but i want to add a child link with the ogre one
     [self addChildViewController:ogreViewController];
     
+    // add the ogre view as a sub view and add constraints for them to match
     [self.view addSubview:mOgreView];
     [self.view sendSubviewToBack:mOgreView];
+    mOgreView.translatesAutoresizingMaskIntoConstraints = NO;
+    NSDictionary *views = NSDictionaryOfVariableBindings(mOgreView);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mOgreView]|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mOgreView]|"
+                                                                 options:0
+                                                                 metrics:nil
+                                                                   views:views]];
+    [self.view layoutIfNeeded];
+    
     // Create a CMMotionManager
     mMotionManager = [[CMMotionManager alloc] init];
     
@@ -141,6 +159,8 @@
     
     [mDisplayLink invalidate];
     mDisplayLink = nil;
+    
+    [mOgreView release];
 }
 
 - (void)update:(id)sender
@@ -239,27 +259,14 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    if(mApplication.mRenderWindow != NULL)
-    {
-        unsigned int width  = self.view.bounds.size.width;
-        unsigned int height = self.view.bounds.size.height;
-        
-        // Resize the view
-        mOgreView.frame = CGRectMake(0,0,width,height);
-        
-        // Resize the window
-        mApplication.mRenderWindow->resize(width, height);
-        
-        // After rotation the aspect ratio of the viewport has changed, update that as well.
-        if(mApplication.mRenderWindow->getNumViewports() > 0)
-        {
-            Ogre::Viewport *viewPort = mApplication.mRenderWindow->getViewport(0);
-            viewPort->getCamera()->setAspectRatio((Ogre::Real) width / (Ogre::Real) height);
-        }
-    }
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self startMotionListener];
 }
 
 
+- (void)dealloc
+{
+    [self stop];
+    [super dealloc];
+}
 @end
