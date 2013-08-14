@@ -222,7 +222,9 @@ void OgreApplication::initializeRenderer(void* uiWindow, void* uiView, void* uiV
     
     Ogre::NameValuePairList params;
     params["colourDepth"] = "32";
-    params["contentScalingFactor"] = 2.0;
+    params["contentScalingFactor"] = "2.0";
+    params["FSAA"] = "16";
+    params["Video Mode"] = Ogre::StringConverter::toString(width) + "x" + Ogre::StringConverter::toString(height);
     params["externalWindowHandle"] = Ogre::StringConverter::toString((unsigned long)uiWindow);
     params["externalViewHandle"] = Ogre::StringConverter::toString((unsigned long)uiView);
     params["externalViewController"] = Ogre::StringConverter::toString((unsigned long)uiViewController);
