@@ -18,3 +18,7 @@ For more information, read the dedicated [blog post](http://www.crowdscontrol.ne
 	1. Open the project `OgreExistingView` settings;
 	2. Go to the bottom of the *Build Settings* tab;
 	3. Make sure `OGRE_SDK_ROOT` is set to the path to the Ogre iOS SDK.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cloderic/ios-ogre/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
